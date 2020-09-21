@@ -1,0 +1,41 @@
+.bx-breadcrumb {
+	margin: 30px 0;
+}
+
+.bx-breadcrumb .icon_slash{
+	display: block;
+	float: left;
+	margin: 0 7px;
+	font-size: 16px;
+	color: #02578e;
+	
+}
+.bx-breadcrumb i {
+	color: #02578e;
+	line-height: 13px;
+	font-size: 12px;
+	vertical-align: middle;
+	margin-right: 5px;
+	float: left;
+}
+.bx-breadcrumb .bx-breadcrumb-item {
+	float: left;
+	/*margin-bottom: 10px;*/
+	white-space: nowrap;
+	line-height: 13px;
+	vertical-align: middle;
+	margin: 0 10px;
+}
+.bx-breadcrumb .bx-breadcrumb-item span{
+
+	font-family: 'Roboto', sans-serif;
+	font-size: 13px;
+	color: #02578e;
+}
+.bx-breadcrumb .bx-breadcrumb-item a {
+	border-bottom: none;
+	color: #02578e;
+	font-size: 13px;
+	font-family: 'Roboto', sans-serif;
+}
+.bx-breadcrumb .bx-breadcrumb-item a:hover {}

@@ -1,0 +1,5 @@
+<? $sSectionName = "biotrade";
+$arDirProperties = Array(
+
+);
+?>

@@ -1,0 +1,154 @@
+<?$_SERVER["DOCUMENT_ROOT"] = "/home/bitrix/www";
+$DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
+define("NO_KEEP_STATISTIC", true);
+define("NOT_CHECK_PERMISSIONS", true);
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+/*
+	ini_set('error_reporting', E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+/* */
+
+$fp = fopen($_SERVER["DOCUMENT_ROOT"].'/test/tmp.csv', 'w');
+if(!CModule::IncludeModule("iblock")){
+	die('Модуль Инфоблоков не подключен!');
+}
+$CIBlockElement = new CIBlockElement;
+// $list_break = array();
+// $dir = $_SERVER["DOCUMENT_ROOT"].'/upload/prom/';
+// $files = scandir($dir);
+// for ($i = 0; $i < count($files); $i++) {
+// 	$res_dir_pict = stristr($files[$i], '.', true);
+// 	$res_array = explode(' ', $res_dir_pict);
+// 	array_push($list_break, $res_array[0]);
+// }
+// array_splice($list_break,0,2);
+
+$titles = array('Название_позиции', 'Идентификатор_товара', 'Ключевые_слова', 'Описание', 'Цена', 'Валюта', 'Скидка', 'Единица_измерения', 'Наличие', 'Ссылка_изображения', 'Производитель');
+fputcsv($fp, $titles, ';', '"');
+//foreach ($list_break as $arExternal) {
+	$arFilter = array(
+		'IBLOCK_ID' => 2,
+		'ACTIVE' => 'Y',
+		'EXTERNAL_ID'=> $arExternal
+	);
+	$arSelect = array(
+		'IBLOCK_ID',
+		'ID',
+		'NAME',
+		'EXTERNAL_ID',
+		'PREVIEW_TEXT',
+		'CATALOG_PRICE_2',
+		'CATALOG_GROUP_2',
+		'CATALOG_CURRENCY_2',
+		'PROPERTY_KEYWORDS_VALUE', //Ключевые слова
+		'CATALOG_AVAILABLE',
+		'SHOW_DISCOUNT_PERCENT'
+	);
+
+	$rsElement = $CIBlockElement->GetList(array('ID'=>'ASC'),$arFilter,false,false,$arSelect);
+	while ($arElement = $rsElement->GetNext()) {
+		//pre($arElement);
+		//Производитель & Ключевые слова
+		$rsList = CIBlockElement::GetList(false, array('ID' => $arElement['ID'], 'IBLOCK_ID' => 2), false, false, array('PROPERTY_MANUFACTURER', 'PROPERTY_KEYWORDS'));
+		if($arList = $rsList->Fetch()){
+			$arList['PROPERTY_MANUFACTURER_VALUE'];
+			$arList['PROPERTY_KEYWORDS_VALUE'];
+		}
+		//Цена
+		$db_res = CPrice::GetList(array(),array("PRODUCT_ID" => $arElement['ID'],"CATALOG_GROUP_ID" => 1));
+		if($ar_res = $db_res->Fetch()){
+			if($ar_res["PRICE"] != 0) {
+				CurrencyFormat($ar_res["PRICE"], $ar_res["CURRENCY"]);
+			} else {
+				$ar_res["PRICE"] = '';
+			}
+			//pre($ar_res["PRICE"]);
+		}
+		//Скидка
+		$db_res2 = CPrice::GetList(array(),array("PRODUCT_ID" => $arElement['ID'],"CATALOG_GROUP_ID" => 2));
+		if($ar_res2 = $db_res2->Fetch()){
+			CurrencyFormat($ar_res2["PRICE"], $ar_res2["CURRENCY"]);
+		}
+		//Расчитываем % скидки
+		$main_price = $ar_res["PRICE"];
+		$main_price_dis = $ar_res2["PRICE"];
+		if($main_price_dis != ''){
+			$rezult = round((($main_price_dis-$main_price)*100/$main_price_dis), 0) . '%';
+			//exit();
+			if ($rezult == 0) {
+				$rezult = '';
+			}
+		}
+		//Изображение товара
+		$wimage = "";
+		$fimg = "";
+		$path = $_SERVER["DOCUMENT_ROOT"].'/upload/prom/'; // задаем путь до сканируемой папки с изображениями
+		$images = scandir($path); // сканируем папку
+		if ($images !== false) { // если нет ошибок при сканировании
+			$images = preg_grep("/\.(?:png|gif|jpe?g)$/i", $images); // через регулярку создаем массив только изображений
+		if (is_array($images)) { // если изображения найдены
+			foreach($images as $image) { // делаем проход по массиву
+				$fimg .= "<img src='".$path.htmlspecialchars(urlencode($image))."' alt='".$image."' />";
+			}
+				$wimage .= $fimg;
+		} else { // иначе, если нет изображений
+			$wimage .= "<div style='text-align:center'>Не обнаружено изображений в директории!</div>\n";
+			}
+			} else { // иначе, если директория пуста или произошла ошибка
+				$wimage .= "<div style='text-align:center'>Директория пуста или произошла ошибка при сканировании.</div>";
+		}
+	}
+		echo $wimage; // выводим полученный результат
+
+
+
+		// pre($list_break);
+		// for ($i = 0; $i < count($list_break); $i++) {
+		// 	$img_shaping_r = $list_break[$i] . '.jpg';
+		// }
+
+		// $dir = $_SERVER["DOCUMENT_ROOT"].'/upload/prom/';
+		// $files = scandir($dir);
+		// for ($i = 0; $i < $files; $i++) {
+		// 	$res_dir_pict = stristr($files[$i], '.', true);
+		// }
+
+		// $img_shaping = $arElement['EXTERNAL_ID'] . '.jpg';
+	    // $img_result = 'http://online-apteka.com.ua/upload/prom/'.$img_shaping.'';
+		// pre($img_result);
+
+		//Вывод едениц измерения
+		if( CModule::IncludeModule("catalog") ) {
+			$res_measure = CCatalogMeasure::getList();
+			while($measure = $res_measure->Fetch()) {
+				if($measure['ID']==$codeMeasure) return $measure['SYMBOL_RUS'];
+				$measure_result = explode(' , ', $measure['SYMBOL_RUS'] . '.');
+			}
+			//pre($measure_result[0]);
+		}
+
+		$list = array (
+			array(
+				$arElement['NAME'],
+				$arElement['ID'],
+				$arList['PROPERTY_KEYWORDS_VALUE'],
+				$arElement['PREVIEW_TEXT'],
+				$ar_res['PRICE'],
+				$ar_res['CURRENCY'],
+				$rezult,
+				$measure_result[0],
+				$arElement['CATALOG_AVAILABLE'],
+				$img_result,
+				$arList['PROPERTY_MANUFACTURER_VALUE']
+			)
+		);
+
+		foreach ($list as $fields) {
+			fputcsv($fp, $fields, ';', '"');
+		}
+	//}
+}
+fclose($fp);
+
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");

@@ -1,0 +1,5 @@
+<? $sSectionName = "Hormeta";
+$arDirProperties = Array(
+
+);
+?>

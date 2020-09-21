@@ -1,0 +1,49 @@
+div.mfeedback {}
+/*div.mf-name, div.mf-email, div.mf-captcha, div.mf-message {width:80%; padding-bottom:0.4em;}
+div.mf-name input, div.mf-email input {width:60%;}
+div.mf-message textarea {width: 60%;}*/
+.mf-text{
+	color: #000;
+	font-size: 15px;
+	font-family: 'Roboto', sans-serif;
+}
+span.mf-req {color:red;}
+div.mf-ok-text {color:green; font-weight:bold; padding-bottom: 1em;}
+div.mf-name input, div.mf-email input{
+	width: 100%;
+	height: 30px;
+	border: 1px solid #dde4ea;
+	padding-left: 10px;
+}
+textarea{
+	background: #fff;
+	border: 1px solid #dde4ea;
+	overflow: hidden;
+	padding: 10px;
+}
+textarea:focus{border: 1px solid #dde4ea !important; }
+input:focus{
+	outline: none;
+}
+input[type="submit"]{
+	border: 0;
+    background: #ed1c24;
+    color: #fff;
+    border-radius: 5px 5px 5px 0;
+    padding: 4px 11px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+input[name="captcha_word"]{
+	width: 50%;
+	height: 30px;
+	border: 1px solid #dde4ea;
+	padding-left: 10px;
+}
+h2{
+	text-transform: uppercase;
+	color: #ed1c24;
+	font-size: 20px;
+	margin: 15px 0px;
+	font-family: 'Roboto', sans-serif;
+}

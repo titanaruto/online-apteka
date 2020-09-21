@@ -1,0 +1,17 @@
+div.news-detail
+{
+	word-wrap: break-word;
+	float: left;
+}
+div.news-detail img.detail_picture
+{
+	margin: 10px auto 10px auto;
+	display: block;
+	clear: both;
+}
+.news-date-time
+{
+	color:#486DAA;
+    display: block;
+    clear: both;
+}

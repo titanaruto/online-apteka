@@ -1,0 +1,104 @@
+Options -Indexes
+ErrorDocument 404 /404.php
+#php_value auto_prepend_file "/var/www/online-apteka.com.ua.local/public/bitrix/modules/security/tools/start.php"
+
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteEngine On
+    #RewriteBase /
+####################################################################################################
+  RewriteCond %{THE_REQUEST} // [OR]
+  RewriteCond %{THE_REQUEST} %2F
+  #RewriteRule .* /$0 [R=301,L]
+  RewriteRule ^registr/personal/order/make/$  /personal/order/make/  [R=301,L]
+
+  RewriteCond %{THE_REQUEST} //
+  # Проверяем, повторяется ли слеш (//) более двух раз.
+  RewriteRule .* /$0 [R=301,L]
+
+  RewriteCond %{REQUEST_URI}  !^/upload/
+  RewriteCond %{REQUEST_URI}  ^/about/contacts
+  RewriteRule ^(.*)$  http://online-apteka.com.ua.local/contact/  [R=301,L]
+
+  #index.php & www
+  RewriteCond %{REQUEST_URI}  !^/upload/
+  RewriteCond %{REQUEST_URI}  !^/sitemap [NC]
+  RewriteCond %{REQUEST_URI}  !^/robots [NC]
+  RewriteCond %{REQUEST_URI}  !^/bitrix [NC]
+  RewriteCond %{HTTP_HOST}  ^www\.  [NC]
+  RewriteCond %{REQUEST_URI}  ^/index.php$ [NC]
+  RewriteRule ^(.*)$ http://online-apteka.com.ua.local/ [R=301,L]
+
+  #www & /index.php
+  RewriteCond %{REQUEST_URI}  !^/upload/
+  RewriteCond %{REQUEST_URI}  !^/sitemap [NC]
+  RewriteCond %{REQUEST_URI}  !^/robots [NC]
+  RewriteCond %{REQUEST_URI}  !^/bitrix [NC]
+  RewriteCond %{HTTP_HOST}  ^www\.  [NC]
+  RewriteCond %{REQUEST_URI}  ^(.*)index.php$ [NC]
+  RewriteRule ^(.*)$  http://online-apteka.com.ua.local%1  [R=301,L]
+
+  #index.php
+  RewriteCond %{REQUEST_URI}  !^/upload/
+  RewriteCond %{REQUEST_URI}  !^/sitemap [NC]
+  RewriteCond %{REQUEST_URI}  !^/robots [NC]
+  RewriteCond %{REQUEST_URI}  !^/bitrix [NC]
+  RewriteCond %{REQUEST_URI}  ^(.*)index.php$ [NC]
+  RewriteRule ^(.*)$  http://online-apteka.com.ua.local%1  [R=301,L]
+
+  # www & /
+  RewriteCond %{REQUEST_URI}  !^/upload/
+  RewriteCond %{REQUEST_URI}  !^/sitemap [NC]
+  RewriteCond %{REQUEST_URI}  !^/robots [NC]
+  RewriteCond %{REQUEST_URI}  !^/bitrix [NC]
+  RewriteCond %{REQUEST_URI}  !php$ [NC]
+  RewriteCond %{HTTP_HOST}    ^www\. [NC]
+  RewriteCond %{REQUEST_URI}  ^(.*[^\/])$ [NC]
+  RewriteRule ^(.*)$  http://online-apteka.com.ua.local%1/  [R=301,L]
+
+  #uri/
+  RewriteCond %{REQUEST_URI}  !^/upload/
+  RewriteCond %{REQUEST_URI}  !^/shzurnal/
+  RewriteCond %{REQUEST_URI}  !^/sitemap [NC]
+  RewriteCond %{REQUEST_URI}  !^/robots [NC]
+  RewriteCond %{REQUEST_URI}  !^/bitrix
+  RewriteCond %{REQUEST_URI}  !php$
+  RewriteCond %{REQUEST_URI}  ^(.*[^\/])$ [NC]
+  RewriteRule ^(.*)$  http://online-apteka.com.ua.local%1/  [L,R=301]
+
+  #www
+  RewriteCond %{REQUEST_URI}  !^/upload/
+  RewriteCond %{REQUEST_URI}  !^/sitemap [NC]
+  RewriteCond %{REQUEST_URI}  !^/robots [NC]
+  RewriteCond %{REQUEST_URI}  !^/bitrix$
+  RewriteCond %{HTTP_HOST}  ^www\.(.*) [NC]
+  RewriteRule ^(.*)$  http://%1/$1  [R=301,L]
+
+####################################################################################################
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
+  RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
+  RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization}]
+</IfModule>
+
+<IfModule mod_php5.c>
+  php_flag session.use_trans_sid off
+  #php_value display_errors 1
+  #php_value mbstring.internal_encoding UTF-8
+  #php_value auto_prepend_file "/home/bitrix/www/html/bitrix/modules/security/tools/start.php"
+</IfModule>
+
+<IfModule mod_dir.c>
+  DirectoryIndex index.php index.html
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresByType image/jpeg "access plus 3 day"
+  ExpiresByType image/gif "access plus 3 day"
+  ExpiresByType image/png "access plus 3 day"
+  ExpiresByType text/css "access plus 3 day"
+  ExpiresByType application/javascript "access plus 3 day"
+</IfModule>

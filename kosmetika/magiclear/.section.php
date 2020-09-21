@@ -1,0 +1,5 @@
+<? $sSectionName = "Magiclear";
+$arDirProperties = Array(
+
+);
+?>

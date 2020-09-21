@@ -1,0 +1,122 @@
+
+.side.bx_catalog_item {
+	margin: 0 1% 30px 1%;
+	width: 97%;
+	padding: 0 0 25px 0px;
+	display: block;
+	border: none;
+}
+
+.side.bx_catalog_item .bx_catalog_item_images_double, .bx_catalog_list_home .bx_catalog_item_images {
+	position: relative;
+	z-index: 910;
+	display: block;
+	height: 253px;
+	width: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	-webkit-background-size: contain;
+	background-size: contain;
+	border: 1px solid #dde4ea;
+}
+
+.side.bx_catalog_item .bx_catalog_item_images_double {
+	z-index: 900 !important;
+	margin-top: -253px !important;
+	height: 253px !important;
+	opacity: 0 !important;
+}
+
+.sidebar .bx_catalog_list_home .bx_catalog_item_title {
+	overflow: auto;
+	white-space: normal;
+	font: 17px 'Roboto Condensed', sans-serif;
+	margin: 20px 0 10px 0;
+	text-align: left;
+}
+
+.sidebar .bx_catalog_list_home .bx_catalog_item_title a {
+	color: #2e2e2e;
+	font: 15px 'Roboto Condensed', sans-serif;
+	text-decoration: none;
+	height: auto;
+}
+
+.sidebar .bx_catalog_list_home .bx_catalog_item_controls .bx_catalog_item_controls_blocktwo{
+	text-align: center;
+}
+.sidebar .bx_catalog_list_home .bx_catalog_item_price{
+	text-align: center;
+}
+.sidebar .bx_catalog_list_home .bx_catalog_item_controls {
+	padding-top: 10px;
+	text-align: center;
+	opacity: 1;
+}
+
+.side.bx_catalog_item .bx_catalog_item_price {
+	font: 20px 'Roboto Condensed', sans-serif;
+	color: #02578e;
+	float: none;
+	text-align: center;
+}
+
+.side.bx_catalog_item .mc-button{
+	float: none;
+}
+
+.side.bx_catalog_item .bx_stick_disc {
+	position: absolute;
+	width: 72px;
+	height: 74px;
+	background: #ed1c24;
+	-webkit-box-shadow: inset 0 -1px 1px #cecece;
+	-moz-box-shadow: inset 0 -1px 1px #cecece;
+	box-shadow: inset 0 -1px 1px #cecece;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	overflow: hidden;
+	/* background: url(/bitrix/templates/eshop_adapt_MC/components/bitrix/catalog.section/top/images/stick_disc.png) no-repeat center; */
+	color: #fff;
+	text-align: center;
+	text-shadow: 0 1px 0 #ba3434;
+	font-weight: bold;
+	font-size: 23px;
+	line-height: 74px;
+}
+
+/*Left side bud-category*/
+.detail-artical_menu .bx_catalog_list_home .bx_catalog_item_title a {
+	color: #2e2e2e;
+	font: 15px 'Roboto Condensed', sans-serif;
+	text-decoration: none;
+	height: auto;
+}
+
+.detail-artical_menu .bx_catalog_list_home .bx_catalog_item_title {
+	margin: 20px 0 10px 0;
+}
+
+.detail-artical_menu .bx_catalog_list_home .bx_catalog_item_controls {
+	padding-top: 10px;
+	text-align: center;
+}
+.artical-wrap-menu .detail-artical_menu {
+	height: auto;
+}
+
+.artical-wrap-menu .detail-artical_menu::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.article-sidebar-left {
+	padding-left: 0;
+}
+
+.detail-artical_menu-name {
+	float: left;
+	width: 50%;
+}

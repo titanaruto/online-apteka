@@ -1,0 +1,65 @@
+div.bx-auth-reg input.bx-auth-input {vertical-align:middle;}
+div.bx-auth-reg span.bx-auth-secure {background-color:#FFFAE3; border:1px solid #DEDBC8; padding:2px; display:inline-block; vertical-align:middle;}
+div.bx-auth-reg div.bx-auth-secure-icon {background-image:url(images/sec.png); background-repeat:no-repeat; background-position:center; width:19px; height:18px;}
+div.bx-auth-reg div.bx-auth-secure-unlock {background-image:url(images/sec-unlocked.png);}
+
+.bx-auth-reg tr td input[type="text"],
+.bx-auth-reg tr td input[type="password"]{
+	line-height: normal;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background: #fff;
+    color: #000;
+    vertical-align: middle;
+    font-size: 14px;
+    width: 100%;
+    height: 35px;
+    border: 1px solid #dde4ea;
+    padding-left: 10px;
+}
+.bx-auth-reg{
+	/*width: 65%;*/
+	margin: 0 auto;
+}
+.bx-auth-reg tr{
+	line-height: 39px;
+}
+.bx-auth-reg tr td input[type="submit"]{
+	margin: 0;
+	float: none;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.bx-auth-reg tr td small{
+	display: none;
+}
+/*.bx-auth-reg td,
+.bx-auth-reg th{
+	display: block;
+	margin-bottom: 10px;
+}*/
+.starrequired{
+	color: red;
+	font-weight: normal;
+}
+
+a.btn.btn-soc-facebook {
+    background: #3B5999;
+    color: #fff;
+    width: 170px;
+    line-height: 1.75em;
+}
+
+a.btn.btn-soc-facebook:hover  {
+    background: #5f7ec1;
+}
+
+input[name=register_submit_button] {
+    height: 40px;
+    padding: 0;
+    width: 150px;
+}

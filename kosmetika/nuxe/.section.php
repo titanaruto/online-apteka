@@ -1,0 +1,5 @@
+<? $sSectionName = "Nuxe";
+$arDirProperties = Array(
+
+);
+?>

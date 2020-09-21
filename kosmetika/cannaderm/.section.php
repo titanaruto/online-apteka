@@ -1,0 +1,5 @@
+<? $sSectionName = "cannederm";
+$arDirProperties = Array(
+
+);
+?>

@@ -1,0 +1,5 @@
+<? $sSectionName = "Phyto";
+$arDirProperties = Array(
+
+);
+?>

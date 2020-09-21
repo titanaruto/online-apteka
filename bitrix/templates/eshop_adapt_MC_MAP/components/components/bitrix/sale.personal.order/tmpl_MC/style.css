@@ -1,0 +1,17 @@
+/*
+.bx_order_list .bx_order_list_table thead tr td,
+.bx_order_list .bx_order_list_table_order thead tr td,
+.bx_my_order .bx_my_order_table thead tr td{
+	background: #02578e !important;
+	color: #fff !important;
+}*/
+.bx_order_list .bx_bt_button_type_2{
+	border: 0 !important;
+    background: #ed1c24 !important;
+    color: #fff !important;
+    border-radius: 5px 5px 5px 0 !important;
+    padding: 4px 11px !important;
+    margin-top: 10px !important;
+    cursor: pointer !important;
+    height: auto !important;
+}

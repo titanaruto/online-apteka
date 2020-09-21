@@ -1,0 +1,38 @@
+.detail-artical_menu{
+	display: block;
+	clear: both;
+	margin-bottom: 5px;
+	height: 100px;
+
+}
+.detail-artical_menu-url{
+	width: 100px; 
+	height: 100px; 
+	-webkit-background-size: contain;
+	background-size: contain; 
+	float: left;
+	display: block;
+	margin-right: 10px;
+}
+.bx_bigimages_aligner{
+	display: block;
+}
+.artical_content_title{
+	text-transform: uppercase;
+	color: #ed1c24;
+	text-align: center;
+	margin: 0 0 20px 0;
+	font-size: 24px;
+}
+.artical-wrap-menu .detail-artical_menu .detail-artical_menu-name {
+	background-color: rgba(218, 240, 251, 0.55);
+	width: 100%;
+	padding: 20px;
+	min-height: 160px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 16px;
+	box-shadow: 3px 1px 2px #548dbf;
+}

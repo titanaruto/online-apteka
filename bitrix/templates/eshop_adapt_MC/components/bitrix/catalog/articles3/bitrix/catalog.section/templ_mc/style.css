@@ -1,0 +1,25 @@
+.bx_catalog_item_images-col {
+    position: relative ;
+    z-index: 910;
+    display: block;
+    height: 160px;
+    width: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    border: 1px solid #dde4ea;
+    margin-right: 15px;
+    float: left;
+}
+.bx_catalog_item{
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #2a2a2a;
+}  
+.bx_catalog_item_title a{
+	text-transform: uppercase;
+	color: #02578e;
+	font-weight: bold;
+	
+}

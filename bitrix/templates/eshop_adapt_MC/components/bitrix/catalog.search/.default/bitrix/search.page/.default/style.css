@@ -1,0 +1,32 @@
+.search-page {
+	position: relative;
+}
+.search-page .bx-form-control{
+	width: auto;
+}
+
+@media screen and (max-width: 480px){
+	.search-page .bx-form-control{
+		border: 1px solid #0081c9;
+	    height: 36px;
+	}
+	.search-page .mc-button.search{
+		float: none;
+	    margin-top: 0;
+	    background: transparent;
+	    box-shadow: none;
+	    position: absolute;
+	   left: 85%;
+   		 z-index: 99;
+	}
+	.search-page .mc-button.search:before,
+	.search-page .mc-button.search:active,
+	.search-page .mc-button.search:active:before{
+	  	background: transparent;
+	    box-shadow: none;
+	     border: 0;
+	}
+	.search-page .mc-button.search i{
+		color: #0081c9;
+	}
+}

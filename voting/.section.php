@@ -1,0 +1,6 @@
+<?
+$sSectionName = "voting";
+$arDirProperties = Array(
+
+);
+?>

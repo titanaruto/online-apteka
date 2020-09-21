@@ -1,0 +1,1 @@
+DROP TABLE if exists b_pga_log;

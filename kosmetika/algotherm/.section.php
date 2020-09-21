@@ -1,0 +1,5 @@
+<? $sSectionName = "Algotherm";
+$arDirProperties = Array(
+
+);
+?>

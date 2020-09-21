@@ -1,0 +1,5 @@
+<? $sSectionName = "Biosphere";
+$arDirProperties = Array(
+
+);
+?>

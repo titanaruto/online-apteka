@@ -1,0 +1,135 @@
+table.form-table
+{
+	width:100%;
+	background-color:white;
+	border-collapse:collapse;
+	font-size:100%;
+	font-weight:normal;
+	line-height:160%;
+}
+
+table.form-table th, table.form-table td
+{
+	border:1px solid #ADC3D5;
+	padding: 5px 5px;
+	vertical-align:top;
+}
+
+/*.workarea,*/
+/*.bx-content-seection {*/
+	/*width: 600px!important;*/
+	/*padding: 0!important;*/
+/*}*/
+
+/*.bx-content {*/
+	/*width: 670px!important;*/
+	/*margin-left: 10px;*/
+	/*!*border: 2px solid blue;*!*/
+/*}*/
+
+/*.bx-core-adm-dialog-content-wrap-inner {*/
+	/*margin-top: 20px;*/
+/*}*/
+
+/*.bx-core-adm-dialog-content {*/
+	/*border: none!important;*/
+	/*background: #fff!important;*/
+/*}*/
+
+table.form-table th
+{
+	background-image:url(images/table_head.gif);
+	background-repeat:repeat-x;
+	text-align: left;
+	color:#25639A;
+}
+
+/*#bx_eshop_wrap {*/
+	/*background: #fff!important;*/
+	/*border: none;*/
+/*}*/
+
+table.form-table td
+{
+	padding: 15px 5px;
+}
+
+/*.form-required*/
+/*{*/
+	/*color: red;*/
+/*}*/
+
+/*.error-fld {*/
+	/*display: block;*/
+	/*float: left;*/
+	/*height: 13px;*/
+	/*width: 15px;*/
+	/*background-repeat: no-repeat;*/
+	/*background-image: url(images/icon_warn.gif);*/
+/*}*/
+
+/*#prescription_for_a_doctor_table tfoot th {*/
+	/*background: none;*/
+	/*text-align: center;*/
+/*}*/
+
+/*#prescription_for_a_doctor_table input[type=submit] {*/
+	/*font-size: 14px;*/
+	/*text-decoration: none;*/
+	/*color: #fff;*/
+	/*!*position: relative;*!*/
+	/*!*height: 25px;*!*/
+	/*!*padding: 1px 10px;*!*/
+	/*!*line-height: 25px;*!*/
+	/*!*margin: 15px 0 0 35px;*!*/
+	/*!*background: #ed1c24!important;*!*/
+	/*background: none!important;*/
+	/*background: -moz-linear-gradient(top, #ed1c24 0%, #a00000 100%, #a00000 100%);*/
+	/*background: -webkit-linear-gradient(top, #ed1c24 0%,#a00000 100%,#a00000 100%);*/
+	/*background: linear-gradient(to bottom, #ed1c24 0%,#a00000 100%,#a00000 100%);*/
+	/*-webkit-border-radius: none;*/
+	/*-moz-border-radius: none;*/
+	/*border-radius: none;*/
+	/*-webkit-box-shadow: none;*/
+	/*-moz-box-shadow: none;*/
+	/*-o-box-shadow: none;*/
+	/*box-shadow: none;*/
+	/*font-weight: 100 !important;*/
+	/*!*border: 1px solid blue;*!*/
+	/*!*padding: 0!important;*!*/
+	/*margin-top: -6px;*/
+/*}*/
+
+/*.bx-core-adm-dialog-content-wrap-inner,*/
+/*.bx-core-adm-dialog-content-wrap adm-workarea {*/
+	/*padding: 0!important;*/
+/*}*/
+
+/*#prescription_for_a_doctor_table input {*/
+	/*width: 50%;*/
+/*}*/
+
+/*#bx-admin-prefix #prescription_for_a_doctor_table textarea {*/
+
+/*}*/
+
+/*#prescription_for_a_doctor_table label.mc-button {*/
+	/*height: 25px;*/
+	/*line-height: 25px;*/
+/*}*/
+
+/*.bx-content-seection {*/
+	/*border: none!important;*/
+/*}*/
+
+/*#prescription_for_a_doctor_table {*/
+	/*width: 100%;*/
+/*}*/
+
+/*#prescription_for_a_doctor_table input[type=submit]:hover {*/
+	/*cursor: pointer;*/
+	/*background: #a00000!important;*/
+	/*background: -moz-linear-gradient(top, #a00000 0%, #ed1c24 100%);*/
+	/*background: -webkit-linear-gradient(top, #a00000 0%,#ed1c24 100%);*/
+	/*background: linear-gradient(to bottom, #a00000 0%,#ed1c24 100%);*/
+/*}*/

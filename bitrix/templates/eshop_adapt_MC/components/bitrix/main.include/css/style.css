@@ -1,0 +1,27 @@
+.jR3DCarouselGallery_a {
+    height: 195px;
+    width: 100%;
+    display: block;
+    position: absolute;
+    z-index: 999;
+}
+
+.jR3DCarouselGallery_a_1 {
+    height: 195px;
+    width: 100%;
+    display: block;
+    position: absolute;
+    z-index: 999;
+    bottom: 0;
+}
+
+.jR3DCarouselGallery_1,
+.jR3DCarouselGallery_2,
+.jR3DCarouselGallery_3 {
+    position: relative;
+}
+
+.sidebar_banner .images_wrap a:nth-child(3),
+.sidebar_banner .images_wrap a:nth-child(4) {
+    display: none;
+}
