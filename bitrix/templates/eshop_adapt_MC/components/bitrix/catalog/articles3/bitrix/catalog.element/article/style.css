@@ -36,3 +36,21 @@
 	font-size: 16px;
 	box-shadow: 3px 1px 2px #548dbf;
 }
+.artical-wrap-menu .detail-artical_menu .detail-artical_menu-name {
+	width: 80%;
+}
+
+.artical-wrap-menu.artical-wrap-menu_mobile {
+	display: none;
+}
+.bx_bigimages_imgcontainer img {
+	max-width: 100%;
+}
+@media screen and (max-width: 420px) {
+	.artical-wrap-menu.artical-wrap-menu_mobile {
+		display: block;
+	}
+	.artical-wrap-menu.artical-wrap-menu_desctop {
+		display: none;
+	}
+}

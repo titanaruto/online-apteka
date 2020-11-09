@@ -115,7 +115,7 @@ if (!function_exists("PrintPropsForm"))
                                 if (strlen(trim($arProperties["DESCRIPTION"])) > 0):
                                     ?>
                                     <div class="bx_description">
-                                        <span class="bx-own-txt"><?=$own_text_result; ?></span>
+                                        <span class="bx-own-txt"><?=$arProperties["DESCRIPTION"]; ?></span>
                                     </div>
                                 <?
                                 endif;

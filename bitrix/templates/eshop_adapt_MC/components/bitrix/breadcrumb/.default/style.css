@@ -82,6 +82,10 @@
 		white-space: normal;
 		margin: 7px 0px;
 	}
+
+	.product-breadcrumbs-list .bx-breadcrumb .bx-breadcrumb-item {
+		padding-top: 8px;
+	}
 	.bx-breadcrumb .bx-breadcrumb-item:first-of-type{
 	}
 	/*.bx-breadcrumb .bx-breadcrumb-item span{*/

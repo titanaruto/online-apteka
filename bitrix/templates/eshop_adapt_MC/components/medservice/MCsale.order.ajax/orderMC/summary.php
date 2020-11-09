@@ -10,7 +10,7 @@ $bShowNameWithPicture = ($bDefaultColumns) ? true : false; // flat to show name 
 ?>
 <div class="bx_ordercart">
 	<h4><?=GetMessage("SALE_PRODUCTS_SUMMARY");?></h4>
-	<div class="bx_ordercart_order_table_container">
+    <div class="bx_ordercart_order_table_container" style="border: 2px solid #02578e; border-collapse: inherit">
 		<table id="tableOrd">
 			<thead class="basket_items_head_row">
 				<tr>
@@ -79,9 +79,6 @@ $bShowNameWithPicture = ($bDefaultColumns) ? true : false; // flat to show name 
 			<tbody>
 				<?foreach ($arResult["GRID"]["ROWS"] as $k => $arData) {?>
                 <tr class="row-goods" id="<?= $arData['data']['ID'] ?>">
-                    <td>
-                        <a data-product-id="<?=$arData['data']['ID']?>" class="mc-button delete main"></a><br />
-                    </td>
                     <td class="margin"></td>
                     <?
                     if ($bShowNameWithPicture):
@@ -145,8 +142,7 @@ $bShowNameWithPicture = ($bDefaultColumns) ? true : false; // flat to show name 
                     if ($arColumn["id"] == "NAME"):
                     $width = 70 - ($imgCount * 20);
                     ?>
-                    <td class="item" style="width:<?/*=$width*/
-                    ?>%">
+                        <td class="item" style="width: 30%">
 
                         <h2 class="bx_ordercart_itemtitle">
                             <?php
@@ -332,9 +328,23 @@ $bShowNameWithPicture = ($bDefaultColumns) ? true : false; // flat to show name 
 						}
 						
 						?>
-							<td class="<?=$arItem[$arColumn["id"]] == 0 ? '' : 'custom'?>" <?=$id?>>
-								<span><?=getColumnName($arColumn)?></span>
-								<?=$arItem[$arColumn["id"]] == 0 ? '' : $arItem[$arColumn["id"]]?>
+							<td class="<?=$arItem[$arColumn["id"]] == 0 ? '' : 'custom'?> <?= $arColumn["id"] ?>" <?=$id?>>
+                                <? if($arColumn["id"] == 'QUANTITY') : ?>
+                                    <div class="basket_quantity_control">
+                                        <table border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                            <tr>
+
+                                                <td><a href="javascript:void(0);" class="minus"></a></td>
+                                                <td><input type="text" size="3" id="" name="" maxlength="18" min="0" z="" max="10000000" step="1" style="max-width: 50px" value="<?=$arItem[$arColumn["id"]] == 0 ? '' : $arItem[$arColumn["id"]]?>" onchange=""></td>
+                                                <td valign="middle"><a href="javascript:void(0);" class="plus"></a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <?else:?>
+                                    <?=$arItem[$arColumn["id"]] == 0 ? '' : $arItem[$arColumn["id"]]?>
+                                <?endif;?>
 							</td>
 						<?
 						else: // some property value
@@ -376,12 +386,29 @@ $bShowNameWithPicture = ($bDefaultColumns) ? true : false; // flat to show name 
 
 					endforeach;
 					?>
-
+                    <td>
+                        <a data-product-id="<?=$arData['data']['ID']?>" class="mc-button delete main"></a><br />
+                    </td>
 				</tr>
 				<?php }?>
 			</tbody>
 		</table>
-	</div>
+        <div class="bx_ordercart_order_pay">
+            <div class="bx_ordercart_order_pay_right">
+                <table class="bx_ordercart_order_sum">
+                    <tbody>
+                    <tr class='total-costt'>
+                        <td class="custom_t1 fwb" colspan="<?=$colspan?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_IT")?></td>
+                        <td class="custom_t2 fwb" class="price" id="totalOrder"><?=$arResult["ORDER_TOTAL_PRICE_FORMATED"]?></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="clear:both;"></div>
+
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
     <script>
         gtag('event', 'begin_checkout', {
             "items": [
@@ -398,31 +425,120 @@ $bShowNameWithPicture = ($bDefaultColumns) ? true : false; // flat to show name 
             ]
         });
     </script>
-	<div class="bx_ordercart_order_pay">
-		<div class="bx_ordercart_order_pay_right">
-			<table class="bx_ordercart_order_sum">
-				<tbody>
-                    <tr class='total-costt'>
-                        <td class="custom_t1 fwb" colspan="<?=$colspan?>" class="itog"><?=GetMessage("SOA_TEMPL_SUM_IT")?></td>
-                        <td class="custom_t2 fwb" class="price" id="totalOrder"><?=$arResult["ORDER_TOTAL_PRICE_FORMATED"]?></td>
-                    </tr>
-				</tbody>
-			</table>
-			<div style="clear:both;"></div>
 
-		</div>
-		<div style="clear:both;"></div>
-		<div class="bx_section">
-			<h4><?=GetMessage("SOA_TEMPL_SUM_COMMENTS")?></h4>
-			<textarea name="ORDER_DESCRIPTION" id="ORDER_DESCRIPTION" style="max-width:100%;min-height:120px"><?=$arResult["USER_VALS"]["ORDER_DESCRIPTION"]?></textarea>
-			<input type="hidden" name="" value="">
-			<div style="clear: both;"></div><br />
-		</div>
-	</div>
 </div>
 
 <script>
     $(document).ready(function() {
+
+        $("#tableOrd a.plus").on('click', function () {
+            $this = $(this);
+            $input = $this.closest('tr').find('input');
+            let product_id = $(this).parents('.row-goods').attr('id');
+            let old_quantity = $input.val();
+            let new_quantity = parseInt(old_quantity) +1;
+            $input.val(new_quantity);
+            let quantity = 'QUANTITY_' + product_id;
+            let data = {
+                sessid: "<?=$_SESSION['fixed_session_id']?>",
+                site_id: 's1',
+                action_var: 'basketAction',
+                select_props: 'NAME,DISCOUNT,PROPS,DELETE,DELAY,PRICE,QUANTITY,SUM',
+                offers_props: 'SIZES_SHOES,SIZES_CLOTHES,COLOR_REF',
+                quantity_float: "N",
+                count_discount_4_all_quantity: "N",
+                price_vat_show_value: "Y",
+                hide_coupon: "Y",
+                use_prepayment: "N",
+                basketAction: 'recalculate'
+            }
+            data[quantity] = new_quantity;
+            BX.ajax({
+                method:"POST",
+                dataType: "json",
+                url: "/bitrix/components/bitrix/sale.basket.basket/ajax.php",
+                data: data,
+                cache:false,
+                start: true,
+                onsuccess: function (response){
+                    let returnedData =response;
+                    let allSum = returnedData['BASKET_DATA']['allSum'];
+                    arPrice = returnedData['BASKET_DATA']['GRID']['ROWS'];
+                    let arr = Object.values(arPrice);
+                    arr.forEach(el=>{
+                        document.querySelectorAll('.row-goods').forEach(good=>{
+                            if(parseInt(good.getAttribute('id')) == el.ID){
+                                $(`#${el.ID}`).find('.SUM').html(el.SUM);
+                            }
+                        })
+                    })
+                    $("#totalOrder, #courier-cart-sum").html(allSum + ' ГРН');
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText + '|\n' + status + '|\n' +error);
+                }
+            })
+
+        })
+
+        $("#tableOrd a.minus").on('click', function (e) {
+                $this = $(this);
+                $input = $this.closest('tr').find('input');
+                if ($input.val() > 1){
+                    let old_quantity = $input.val();
+                    let product_id = $(this).parents('.row-goods').attr('id');
+                    let new_quantity = parseInt(old_quantity) -1;
+                    $input.val(new_quantity);
+                    if (new_quantity < 0){
+                        new_quantity = 0;
+                    }
+                    let quantity = 'QUANTITY_' + product_id;
+                    let data = {
+                        sessid: "<?=$_SESSION['fixed_session_id']?>",
+                        site_id: 's1',
+                        action_var: 'basketAction',
+                        select_props: 'NAME,DISCOUNT,PROPS,DELETE,DELAY,PRICE,QUANTITY,SUM',
+                        offers_props: 'SIZES_SHOES,SIZES_CLOTHES,COLOR_REF',
+                        quantity_float: "N",
+                        count_discount_4_all_quantity: "N",
+                        price_vat_show_value: "Y",
+                        hide_coupon: "Y",
+                        use_prepayment: "N",
+                        basketAction: 'recalculate'
+                    }
+                    data[quantity] = new_quantity;
+                    BX.ajax({
+                        method:"POST",
+                        dataType: "json",
+                        url: "/bitrix/components/bitrix/sale.basket.basket/ajax.php",
+                        data: data,
+                        cache:false,
+                        start: true,
+
+                        onsuccess: function (response){
+                            let returnedData =response;
+                            // console.log(returnedData);
+                            arPrice = returnedData['BASKET_DATA']['GRID']['ROWS'];
+                            let allSum = returnedData['BASKET_DATA']['allSum'];
+                            let arr = Object.values(arPrice);
+                            arr.forEach(el=>{
+                                document.querySelectorAll('.row-goods').forEach(good=>{
+                                    if(parseInt(good.getAttribute('id')) == el.ID){
+                                        $(`#${el.ID}`).find('.SUM').html(el.SUM);
+                                    }
+                                })
+                            })
+                            $("#totalOrder, #courier-cart-sum").html(allSum + ' ГРН');
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr.responseText + '|\n' + status + '|\n' +error);
+                        }
+                    })
+
+                }
+            }
+        )
+
         $("#tableOrd a.mc-button.delete.main").on('click', function () {
             let data = $(this).data('product-id')
             $.ajax({

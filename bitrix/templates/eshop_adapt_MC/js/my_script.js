@@ -311,3 +311,34 @@ function deleteProductsFromCart() {
         return false
     })
 }
+var list = $('.root-list');
+if(list.length > 4) {
+    function animateList(direction) {
+        if (direction === 'down') {
+            $('.root-list.active')
+                .find('li:first')
+                .before($('li:last', '.root-list.active'))
+                .end()
+                .scrollTop(40)
+                .stop()
+                .animate({scrollTop: 0}, 100, 'swing');
+        } else {
+            $('.root-list.active')
+                .animate({scrollTop: 40}, 100, 'swing', function () {
+                    $(this)
+                        .find('li:last')
+                        .after($('li:first', '.root-list.active'));
+                });
+        }
+    }
+    $('.next-prev').on('click', function () {
+        $('.root-list').removeClass('active');
+        $(this).parents().prev('ul').addClass('active');
+        var direction = $(this).attr('id');
+        animateList(direction);
+    });
+}
+var elemHeight = $('.root-item2').height();
+if(elemHeight < 400) {
+    $('.root-item2').css('overflow', 'auto');
+}

@@ -115,47 +115,17 @@ $APPLICATION->SetAdditionalCSS($templateFolder."/style.css");
 //pre($arResult["GRID"]["ROWS"]);
 //die();
 ?>
-<div class="autorized-user-unreg">
-<?
-//Authorization if use dont't registrate
-global $USER;
-if ($USER->IsAuthorized()){
-    $user_id = CUser::GetID();
-    $rsUser = CUser::GetByID($user_id);
-    $arUser = $rsUser->Fetch();
-
-    // print_r("Добро пожаловать на наш сайт!<br>");
-    // print_r("ID пользователя: ".$USER->GetID()."<br>");
-    // print_r("Логин пользователя: ".$USER->GetLogin()."<br>");
-    // print_r("Имя и фамилия пользователя: ".$USER->GetFullName()."<br>");
-    } else {?>
-
-    <a href="#" class="link-regular-customer" > я постоянный клиент</a>
-<!--    class="help-regular-customer"-->
-    <span  class="help-regular-customer alert alert-info" >пожалуйста, авторизуйтесь.</span>
-
-    <div id="show-regular-customer" class="regular-customer">
-    <span class="question-txt question-txt-autorized">Если вы уже зарегистрированы - введите логин и пароль!</span>
-    <?$APPLICATION->IncludeComponent(
-    "bitrix:system.auth.form",
-    ".default",
-        Array(
-            "REGISTER_URL" => "/registr/index.php",
-            "FORGOT_PASSWORD_URL" => "/personal/profile/?forgot_password=yes",
-            "PROFILE_URL" => "/personal/profile/",
-            "SHOW_ERRORS" => "Y"
-        )
-    );
-}?>
-    </div>
-</div>
 <a name="order_form"></a>
 
 <div id="order_form_div" class="order-checkout <?php echo $USER->IsAuthorized() ? 'bx-content col-md-9 col-sm-8' : ''?>">
 <NOSCRIPT>
-    <div class="errortext"><?=GetMessage("SOA_NO_JS")?></div>
+<!--    <div class="errortext">--><?//=GetMessage("SOA_NO_JS")?><!--</div>-->
 </NOSCRIPT>
 <script type="text/javascript">
+    $( document ).ready(function() {
+        $('#ORDER_PROP_40').attr('type', 'password');
+        $('#ORDER_PROP_41').attr('type', 'password');
+    });
 <?php
 $i=0;
 $b=0;
@@ -462,39 +432,117 @@ if (!function_exists("cmpBySort")) {
                 $APPLICATION->RestartBuffer();
             }
 
-            if($_REQUEST['PERMANENT_MODE_STEPS'] == 1) {
+
+                if ($arParams["DELIVERY_TO_PAYSYSTEM"] == "p2d") {
+                    include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/paysystem.php");
+
+                }
+
                 ?>
-                <input type="hidden" name="PERMANENT_MODE_STEPS" value="1" />
-                <?
-            }
+                    <div class="tabs">
 
-            if(!empty($arResult["ERROR"]) && $arResult["USER_VALS"]["FINAL_STEP"] == "Y") {
-                foreach($arResult["ERROR"] as $v)
-                    echo ShowError($v);
-                ?>
-                <script type="text/javascript">
-                    top.BX.scrollToNode(top.BX('ORDER_FORM'));
-                </script>
-                <?
-            }
+                        <ul class="tabs__caption">
+                            <li class="active">Новый клиент</li>
+                            <li>Постоянный клиент</li>
+                        </ul>
 
-            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/person_type.php");
+                        <div class="tabs__content active">
+                            <?  include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/props.php"); ?>
+                        </div>
 
-            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/props.php");
+                        <div class="tabs__content">
+                            <div class="autorized-user-unreg">
+                                <?
+                                //Authorization if use dont't registrate
+                                global $USER;
+                                if ($USER->IsAuthorized()){
+                                    $user_id = CUser::GetID();
+                                    $rsUser = CUser::GetByID($user_id);
+                                    $arUser = $rsUser->Fetch();
 
-            if ($arParams["DELIVERY_TO_PAYSYSTEM"] == "p2d") {
-                include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/paysystem.php");
-                include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/delivery.php");
-            }
+                                    // print_r("Добро пожаловать на наш сайт!<br>");
+                                    // print_r("ID пользователя: ".$USER->GetID()."<br>");
+                                    // print_r("Логин пользователя: ".$USER->GetLogin()."<br>");
+                                    // print_r("Имя и фамилия пользователя: ".$USER->GetFullName()."<br>");
+                                } else {?>
 
-            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/related_props.php");
+                                <!--                                <a href="#" class="link-regular-customer" > я постоянный клиент</a>-->
+                                <!--    class="help-regular-customer"-->
+                                <!--                                <span  class="help-regular-customer alert alert-info" >пожалуйста, авторизуйтесь.</span>-->
 
-            include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/summary.php");
-            if(strlen($arResult["PREPAY_ADIT_FIELDS"]) > 0)
-                echo $arResult["PREPAY_ADIT_FIELDS"];
-            ?>
+                                <div id="show-regular-customer" class="regular-customer" style="display: block;">
+                                    <span class="question-txt question-txt-autorized">Если вы уже зарегистрированы - введите логин и пароль!</span>
+                                    <?$APPLICATION->IncludeComponent(
+                                        "bitrix:system.auth.form",
+                                        ".default",
+                                        Array(
+                                            "REGISTER_URL" => "/registr/index.php",
+                                            "FORGOT_PASSWORD_URL" => "/personal/profile/?forgot_password=yes",
+                                            "PROFILE_URL" => "/personal/profile/",
+                                            "SHOW_ERRORS" => "Y"
+                                        )
+                                    );
+                                    }?>
+                                </div>
+                            </div>
+                        </div>
 
-            <?if($_POST["is_ajax_post"] != "Y") {
+                    </div>
+                    <script>
+                        (function($) {
+                            $(function() {
+
+                                $('ul.tabs__caption').on('click', 'li:not(.active)', function() {
+                                    $(this)
+                                        .addClass('active').siblings().removeClass('active')
+                                        .closest('div.tabs').find('div.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
+                                });
+
+                            });
+                        })(jQuery);
+                    </script>
+                    <style>
+                        .tabs__content {
+                            display: none;
+                        }
+                        .tabs__content.active {
+                            display: block;
+                        }
+                    </style>
+                    <?
+                    include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/delivery.php");
+
+
+
+                    include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/related_props.php");
+                    if($_REQUEST['PERMANENT_MODE_STEPS'] == 1) {
+                        ?>
+                        <input type="hidden" name="PERMANENT_MODE_STEPS" value="1" />
+                        <?
+                    }
+
+                    if(!empty($arResult["ERROR"]) && $arResult["USER_VALS"]["FINAL_STEP"] == "Y") {
+                        foreach($arResult["ERROR"] as $v)
+                            echo ShowError($v);
+                        ?>
+                        <script type="text/javascript">
+                            top.BX.scrollToNode(top.BX('ORDER_FORM'));
+                        </script>
+                        <?
+                    }
+                    include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/summary.php");
+                    include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/comment.php");
+                    include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/person_type.php");
+
+
+
+
+                    if(strlen($arResult["PREPAY_ADIT_FIELDS"]) > 0)
+                        echo $arResult["PREPAY_ADIT_FIELDS"];
+                    ?>
+
+
+                    <?if($_POST["is_ajax_post"] != "Y") {
                 ?>
                     </div>
                     <input type="hidden" name="confirmorder" id="confirmorder" value="Y">
@@ -1238,7 +1286,7 @@ if (!function_exists("cmpBySort")) {
                         event = event || window.event;
                         let target = event.target || event.srcElement;
                         let erase = event.keyCode;
-                        question.style.display = 'none';
+                        question.style.display = 'block';
                         //ord_city.innerHTML = 'Выбрать адрес аптеки...';
                         ord_oblast_apt.innerHTML = '';
                         ord_oblast_apt.style.display = 'none';

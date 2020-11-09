@@ -69,7 +69,6 @@ include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/props_format.php");
 	?>
 </div>
 
-<br/>
 <div class="bx_section">
 	<h4><?/*=GetMessage("SOA_TEMPL_BUYER_INFO")*/?></h4>
 	<?

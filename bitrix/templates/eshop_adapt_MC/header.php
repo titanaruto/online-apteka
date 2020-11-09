@@ -31,6 +31,17 @@ $curPage = $APPLICATION->GetCurPage(true);
     <meta itemprop="address" content="">
     <meta itemprop="name" content="https://online-apteka.com.ua">
     <meta name="yandex-verification" content="232554c45f3c3023" />
+    <meta property="og:image" content="https://online-apteka.com.ua/include/mc-logo.png" />
+    <meta property="og:site_name" content="https://online-apteka.com.ua"/>
+    <script>
+        document.onclick = function(event) {
+            let target = event.target;
+            if (target.id == 'openCart' || target.className == 'bx_bt_button' || target.className == 'bx_medium bx_bt_button cart-popup-a' || target.className == 'bx_medium bx_bt_button') {
+                window.location.href = '/personal/order/make/';
+            }
+
+        };
+    </script>
 
     <?$APPLICATION->ShowMeta("robots")?>
     <?$APPLICATION->ShowMeta("description")?>

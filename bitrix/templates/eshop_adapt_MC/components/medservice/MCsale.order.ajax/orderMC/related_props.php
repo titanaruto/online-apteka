@@ -1,11 +1,11 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-//include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/apt_location.php");
+include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/apt_location.php");
 include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/props_format.php");
 
 $style = (is_array($arResult["ORDER_PROP"]["RELATED"]) && count($arResult["ORDER_PROP"]["RELATED"])) ? "" : "display:none";
 
 //pre($arResult["ORDER_PROP"]["RELATED"]);
-include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/apt_location.php");
+//include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/apt_location.php");
 ?>
 <div class="bx_section" style="<?=$style?>" id="relPrps">
 	<h4><?=GetMessage("SOA_TEMPL_RELATED_PROPS")?></h4>
