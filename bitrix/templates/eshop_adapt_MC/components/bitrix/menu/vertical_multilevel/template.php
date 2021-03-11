@@ -18,7 +18,12 @@
                 <ul class="test-root2">
             <?endif?>
         <?else:?>
-            <?if ($arItem["PERMISSION"] > "D"):?>
+            <?if ($arItem["DEPTH_LEVEL"] == 1):?>
+                <li class="ss-flex0">
+                    <a href="<?=$arItem["LINK"]?>" class="<?if ($arItem["SELECTED"]):?>root-item-selected<?else:?>root-item<?endif?>"><?=$arItem["TEXT"]?></a>
+                </li>
+
+            <?elseif ($arItem["PERMISSION"] > "D"):?>
                 <?if ($arItem["DEPTH_LEVEL"] == 2):?>
                     <li class="ss-flex2"><a href="<?=$arItem["LINK"]?>" class="<?if ($arItem["SELECTED"]):?>root-item-selected<?else:?>root-item<?endif?>"><?=$arItem["TEXT"]?></a></li>
                 <?else:?>
