@@ -248,8 +248,26 @@ $curPage = $APPLICATION->GetCurPage(true);
                             <meta itemprop="url" content="http://online-apteka.com.ua/include/mc-logo.png">
                         </div>
                         <div class="col-xs-5 col-lg-3  col-md-3 col-sm-5 request">
-                            <span class="bold">
-                                <a href="tel:0 800 50 52 53">0 800 50 52 53</a>
+                            <span class="bold header-callback">
+                                <span class="header-callback__head">
+                                    <a href="tel:0 800 50 52 53">0 800 50 52 53</a>
+                                    <span>Вам перезвонят!</span>
+                                </span>
+
+                                <div class="header-callback-dropdown">
+                                    <div class="header-callback-dropdown__head">
+                                        У нас настроен <span>CALLBACK</span>. Мы сбросим Ваш звонок и перезвоним за свой счет.
+                                        <br>
+                                        Или оставьте Ваш номер для обратного звонка
+                                    </div>
+                                    <form class="contact-feedback" action="">
+                                        <div class="form__group field">
+                                            <input type="input" class="form__field" placeholder="Телефон*" maxlength="50" name="form_feedback_phone" id="phone-feedback" required="">
+                                            <label for="form_feedback_phone" class="form__label">Телефон*</label>
+                                        </div>
+                                        <button class="general-form__button " type="submit">Перезвоните</button>
+                                    </form>
+                                </div>
                               </span>
                             <a href="/catalog/" class="catalog-button hidden-sm hidden-md hidden-lg">Каталог</a>
                             <div class="wrap-button-feedback hidden-xs">
